@@ -17,7 +17,7 @@
 target/*
 .idea/*
 .mule/*
-
+*.iml
 
 # Package Files #
 *.jar
