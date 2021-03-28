@@ -17,15 +17,6 @@ public class DynamicPropertiesExtensionLoadingDelegate implements ExtensionLoadi
     @Override
     public void accept(ExtensionDeclarer extensionDeclarer, ExtensionLoadingContext context) {
 
-        //Declared Extension
-        extensionDeclarer
-                .named(EXTENSION_NAME)
-                .describedAs(EXTENSION_DESCRIPTION)
-                .withCategory(COMMUNITY)
-                .fromVendor(VENDOR)
-                .onVersion("1.0.0");
-
-
         ClassTypeLoader typeLoader = ExtensionsTypeLoaderFactory.getDefault().createTypeLoader();
 
         // Declared Configuration
@@ -44,6 +35,17 @@ public class DynamicPropertiesExtensionLoadingDelegate implements ExtensionLoadi
         parameterGroupDeclarer.withRequiredParameter("driverClassName")
                 .describedAs("Enter Database Driver ClassName")
                 .ofType(typeLoader.load(String.class));
+        parameterGroupDeclarer.withRequiredParameter("tableName")
+                .describedAs("Name of the table where the properties are present")
+                .ofType(typeLoader.load(String.class));
+
+        extensionDeclarer
+                .named(EXTENSION_NAME)
+                .describedAs(EXTENSION_DESCRIPTION)
+                .withCategory(COMMUNITY)
+                .onVersion("1.0.0")
+                .fromVendor(VENDOR);
+
 
     }
 }

@@ -7,6 +7,8 @@ import org.mule.runtime.config.api.dsl.model.ResourceProvider;
 import org.mule.runtime.config.api.dsl.model.properties.ConfigurationPropertiesProvider;
 import org.mule.runtime.config.api.dsl.model.properties.ConfigurationPropertiesProviderFactory;
 
+import javax.sql.DataSource;
+
 import static org.mule.extension.dpl.api.ExtensionConstants.CONFIG_ELEMENT;
 import static org.mule.extension.dpl.api.ExtensionConstants.EXTENSION_NAME;
 
@@ -26,21 +28,26 @@ public class DynamicPropertiesProviderFactory implements ConfigurationProperties
 
     @Override
     public ConfigurationPropertiesProvider createProvider(ConfigurationParameters parameters, ResourceProvider externalResourceProvider) {
+        String tableName = parameters.getStringParameter("tableName");
+        return new DynamicPropertiesProvider(tableName, getDataSource(parameters));
+    }
+
+    private DataSource getDataSource(ConfigurationParameters parameters) {
         String username = parameters.getStringParameter("username");
         String password = parameters.getStringParameter("password");
         String jdbcUrl = parameters.getStringParameter("jdbcUrl");
         String driverClassName = parameters.getStringParameter("driverClassName");
-        String tableName = parameters.getStringParameter("tableName");
-        String columnName = parameters.getStringParameter("columnName");
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
         basicDataSource.setUrl(jdbcUrl);
         basicDataSource.setDriverClassName(driverClassName);
-        basicDataSource.setInitialSize(5);
+        basicDataSource.setMinIdle(5);
+        basicDataSource.setMaxIdle(10);
         basicDataSource.setCacheState(true);
         basicDataSource.setPoolPreparedStatements(true);
-        return new DynamicPropertiesProvider(tableName, columnName, basicDataSource);
+        basicDataSource.setMaxOpenPreparedStatements(100);
+        return basicDataSource;
     }
 
 
