@@ -25,19 +25,25 @@ public class DynamicPropertiesProvider implements ConfigurationPropertiesProvide
     private final static Pattern DYNAMIC_PROPERTIES_PATTERN = Pattern.compile("\\$\\{" + DYNAMIC_PROPERTIES_PREFIX + "[^}]*}");
     private final String tableName;
     private final DataSource dataSource;
+    private final String columnName;
 
     private Connection connection;
 
-    public DynamicPropertiesProvider(String tableName, DataSource dataSource) {
+    public DynamicPropertiesProvider(String tableName,String columnName, DataSource dataSource) {
         this.tableName = tableName;
         this.dataSource = dataSource;
+        this.columnName = columnName;
+    }
+
+    public String getColumnName() {
+        return columnName;
     }
 
     @Override
     public Optional<ConfigurationProperty> getConfigurationProperty(String configurationAttributeKey) {
         if (configurationAttributeKey.startsWith(DYNAMIC_PROPERTIES_PREFIX)) {
             String effectiveKey = configurationAttributeKey.substring(DYNAMIC_PROPERTIES_PREFIX.length());
-            final String effectiveValue = getValue(getTableName(), effectiveKey);
+            final String effectiveValue = getValue(getTableName(),getColumnName(), effectiveKey);
             if (effectiveValue != null) {
                 return Optional.of(new ConfigurationProperty() {
 
@@ -67,8 +73,8 @@ public class DynamicPropertiesProvider implements ConfigurationPropertiesProvide
     }
 
     @DisplayName("Get Property Values")
-    public String getValue(String tableName, String key) {
-        String sqlQuery = "SELECT value FROM " + tableName + " WHERE  key=?";
+    public String getValue(String tableName,String columnName, String key) {
+        String sqlQuery = "SELECT " + columnName + " as value FROM " + tableName + " WHERE  key=?";
         String value = "";
         if (getConnection() != null) {
             try (PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery)) {

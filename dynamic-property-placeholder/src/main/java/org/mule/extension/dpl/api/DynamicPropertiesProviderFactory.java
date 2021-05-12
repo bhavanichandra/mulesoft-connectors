@@ -29,7 +29,8 @@ public class DynamicPropertiesProviderFactory implements ConfigurationProperties
     @Override
     public ConfigurationPropertiesProvider createProvider(ConfigurationParameters parameters, ResourceProvider externalResourceProvider) {
         String tableName = parameters.getStringParameter("tableName");
-        return new DynamicPropertiesProvider(tableName, getDataSource(parameters));
+        String columnName = parameters.getStringParameter("columnName");
+        return new DynamicPropertiesProvider(tableName,columnName, getDataSource(parameters));
     }
 
     private DataSource getDataSource(ConfigurationParameters parameters) {

@@ -38,6 +38,9 @@ public class DynamicPropertiesExtensionLoadingDelegate implements ExtensionLoadi
         parameterGroupDeclarer.withRequiredParameter("tableName")
                 .describedAs("Name of the table where the properties are present")
                 .ofType(typeLoader.load(String.class));
+        parameterGroupDeclarer.withRequiredParameter("columnName")
+                .describedAs("Name of the column where the value for the key is present based on environment")
+                .ofType(typeLoader.load(String.class));
 
         extensionDeclarer
                 .named(EXTENSION_NAME)

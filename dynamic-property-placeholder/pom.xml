@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.module</groupId>
     <artifactId>dynamic-property-placeholder</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>mule-extension</packaging>
 
     <name>Dynamic-property-placeholder Extension</name>
