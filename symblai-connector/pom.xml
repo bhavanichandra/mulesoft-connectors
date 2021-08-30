@@ -16,4 +16,35 @@
         <version>1.1.3</version>
     </parent>
 
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.8.2</version>
+            </plugin>
+        </plugins>
+    </build>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>bhavanichandra</id>
+            <name>Bhavani Chandra</name>
+            <email>bhavanichandra9@gmail.com</email>
+            <organization>Standav</organization>
+            <roles>
+                <role>Integration Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
 </project>
