@@ -2,7 +2,7 @@
   "extensionModelLoaderDescriptor": {
     "id": "java",
     "attributes": {
-      "type": "com.themuler.internal.SymblaiExtension",
+      "type": "com.themuler.internal.SymblAIExtension",
       "version": "1.0.0-SNAPSHOT"
     }
   },
@@ -13,7 +13,9 @@
     "attributes": {
       "privilegedExportedPackages": [],
       "privilegedArtifactIds": [],
-      "exportedPackages": [],
+      "exportedPackages": [
+        "com.themuler.api"
+      ],
       "exportedResources": []
     }
   },

@@ -7,25 +7,24 @@ import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 public class Authentication {
 
   @Parameter
-  @DisplayName("API Key")
-  private String apiKey;
+  @DisplayName("App Id")
+  private String appId;
 
   @Parameter
-  @DisplayName("API Secret")
-  private String apiSecret;
+  @DisplayName("App Secret")
+  private String appSecret;
 
   @Parameter
   @DisplayName("Type")
   @Optional(defaultValue = "application")
   private String type;
 
-
-  public String getApiKey() {
-    return apiKey;
+  public String getAppId() {
+    return appId;
   }
 
-  public String getApiSecret() {
-    return apiSecret;
+  public String getAppSecret() {
+    return appSecret;
   }
 
   public String getType() {

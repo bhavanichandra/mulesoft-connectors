@@ -41,7 +41,8 @@ public class SymblAIConnectionProvider implements CachedConnectionProvider<Symbl
       if (connection.isConnected(getAuthentication())) {
         result = success();
       } else {
-        result = failure("Invalid Credentials", new ConnectionException("Invalid SymblAI Credentials"));
+        String errorMessage = "Invalid Credentials: {" + connection.getToken() + "}";
+        result = failure(errorMessage, new ConnectionException(errorMessage));
       }
     } catch (Exception ex) {
       result = failure("Internal Server Failure", ex);
