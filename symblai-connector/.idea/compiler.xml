@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for Symblai Extension" enabled="true">
+        <sourceOutputDir name="target/classes/META-INF" />
+        <sourceTestOutputDir name="target/generated-sources/apt-test" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="extension.version" value="1.0.0-SNAPSHOT" />
+        <processor name="org.mule.runtime.ast.internal.extension.loader.ASTExtensionResourcesGeneratorAnnotationProcessor" />
+        <module name="symblai" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="symblai" options="-parameters" />
+    </option>
+  </component>
+</project>
